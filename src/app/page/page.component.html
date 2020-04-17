@@ -1,0 +1,537 @@
+
+  <div class="d-flex justify-content-center">
+    <div id="logo-whats" class="col justify-content position-fixed">
+      <a href="https://api.whatsapp.com/send?phone=5519982968444&text=Ol%C3%A1,%20tudo%20bem?" target="_blank">
+        <img classe="float-right" style="width: 2%" src="../../assets/icons/chat.png" alt="whatsapp">
+      </a>
+    </div>
+    <form id="customZIndexForm" [formGroup]="form" class="col-4 bg-white position-absolute">
+      <div class="col text-center navFale font-blueCustom py-5 pr-3">
+        <h4 class="mb-2">contacte-nos!</h4>
+      </div>
+      <div [ngClass]="{'mb-3': !validNome,'mb-0': validNome}"> 
+        <div id="invalid-form-control" class="form-group mb-1">
+          <div class="col input-group input-group-sm">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="NOME *"
+              formControlName="nome"
+              (focus)="reset('nome')"
+              [ngClass]="onFieldError('nome') + ' ' + onFieldRequired('nome')"
+              (blur)="exibeMessage('nome')"
+            >
+          </div>
+          <app-invalid-form-control
+            [show]="onFieldInvalid('nome')"
+            message="Nome é obrigatório.">
+          </app-invalid-form-control>
+        </div>
+      </div>
+      <div [ngClass]="{'mb-3': !validEmail,'mb-0': validEmail}"> 
+        <div id="invalid-form-control" class="form-group mb-1">
+          <div class="col input-group input-group-sm">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="EMAIL *"
+              formControlName="email"
+              (focus)="reset('email')"
+              [ngClass]="onFieldError('email') + ' ' + onFieldRequired('email')"
+              (blur)="exibeMessage('email')"
+            >
+          </div>
+          <app-invalid-form-control
+            [show]="onFieldInvalid('email')"
+            message="Email válido é obrigatório.">
+          </app-invalid-form-control>
+        </div>
+      </div>
+      <div [ngClass]="{'mb-3': !validTelefone,'mb-0': validTelefone}"> 
+        <div id="invalid-form-control" class="form-group mb-1">
+          <div class="col input-group input-group-sm">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="TELEFONE *"
+              formControlName="telefone"
+              (focus)="reset('telefone')"
+              [ngClass]="onFieldError('telefone') + ' ' + onFieldRequired('telefone')"
+              (blur)="exibeMessage('telefone')"
+            >
+          </div>
+          <app-invalid-form-control
+            [show]="onFieldInvalid('telefone')"
+            message="Telefone é obrigatório.">
+          </app-invalid-form-control>
+        </div>
+      </div>
+      <div [ngClass]="{'mb-3': !validCidade,'mb-0': validCidade}"> 
+        <div id="invalid-form-control" class="form-group mb-1">
+          <div class="col input-group input-group-sm">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="CIDADE *"
+              formControlName="cidade"
+              (focus)="reset('cidade')"
+              [ngClass]="onFieldError('cidade') + ' ' + onFieldRequired('cidade')"
+              (blur)="exibeMessage('cidade')"
+            >
+          </div>
+          <app-invalid-form-control
+            [show]="onFieldInvalid('cidade')"
+            message="Cidade é obrigatório.">
+          </app-invalid-form-control>
+        </div>
+      </div>
+      <div class="col input-group input-group-sm mb-2">
+        <textarea 
+          rows="4"
+          type="text"
+          class="form-control"
+          placeholder="OBSERVAÇÕES"
+          formControlName="observações"
+        ></textarea>
+      </div>
+      <div class="col-2 pt-4 pb-2">
+        <re-captcha (resolved)="exibeMessage('captcha')" siteKey="6LeinC8UAAAAAHeTvxmOKSinKqhrC7qGgEe-HkPa"></re-captcha>
+      </div>
+      <div class="col pt-2">
+        <label>
+          <input type="checkbox" class="checkbox-custom hover" formControlName="politica" (click)="exibeMessage('politica')">
+          <span id="textSmall" class=" pl-4 pt-2">Li e aceito a <a href="#" (click)="PPModal.show()">Politica de Privacidade</a></span>
+        </label>
+      </div>
+      <div class="col pt-4 pb-2">
+        <div [ngClass]="{disabled: send ? true : false}">
+          <div class="buttomContact hover" (click)="sendEmail(); resetForm()">
+              <p>DESEJO SER CONTACTADO</p>
+          </div>
+        </div>
+      </div>
+      <div class="col pt-2">
+        <div id="textSmall" class="text-center">
+            <p>Ao preencher o formulário vai receber por e-mail a confirmação do seu pedido e o respectivo orçamento.</p>
+        </div>
+      </div>
+    </form>
+    <div class="modal fade" bsModal #PPModal="bs-modal" [config]="{backdrop: 'static'}"
+      tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header pb-0">
+            <span class="pull-right hover" (click)="PPModal.hide()"><img style="width: 50%" src="../../assets/icons/close.png" alt="close"></span>
+          </div>
+          <div class="modal-body pt-0">
+            <div class="d-flex justify-content-center">
+              <div class="col-10 p-0 mb-3">
+                <div class="modal-sobre font-blueCustom text-center mb-4">
+                  <span class="position-sbBlue"><img style="width: 15%" src="../../assets/icons/sb_blue.png" alt="sb_blue"></span>
+                  <h5>Política de Privacidade</h5>
+                </div>
+                <div class="modal-corpo mb-5">
+                  <p>
+                    O presente documento apresenta a política de privacidade da nossa landing page, 
+                    acessível pela Internet através do endereço <a href="#">www.solucoesbrilhantes.pt</a> 
+                    (doravante designado por ‘landing page’). 
+                  </p>
+                  <p>
+                    Respeitamos as preocupações que possa ter sobre a confidencialidade das informações 
+                    e dados pessoais tratados no âmbito da sua navegação da nossa landing page. A presente 
+                    política permitir-lhe obter informações adicionais sobre a natureza e uso que fazemos 
+                    dos dados pessoais que nos fornece na landing page, sobre a origem e uso das informações 
+                    de navegação processadas durante a sua consulta à nossa landing page e, ainda, sobre os seus direitos.
+                  </p>
+                  <p>
+                    Ao utilizar a nossa landing page está a aceitar os termos e condições do presente documento.
+                  </p>
+                  <p>
+                    Podemos alterar a presente política a qualquer momento e essas alterações entrarão em vigor 
+                    imediatamente. 
+                  </p>
+                  <p>
+                    1. Identidade e contactos do responsável pelo tratamento A landing page 
+                    é operada pela Beangel na qualidade de responsável pelo tratamento na aceção da 
+                    legislação aplicável em matéria de dados pessoais, adiante designada por Beangel. 
+                  </p>
+                  <p>
+                    2. Fundamento de legitimidade do tratamento de dados 2.1 Através da landing page poderemos 
+                    recolher dados pessoais (de ora em diante os seus Dados), transmitidos no formulário 
+                    de contacto.
+                  </p>
+                  <p>
+                    2.2 Além dos dados transmitidos no formulário de contacto , os Dados que 
+                    lhe dizem respeito recolhidos e tratados pela nossa landing page decorrem, também, 
+                    dependendo dos serviços utilizados, das suas escolhas e da configuração do seu dispositivo 
+                    (em especial no que se refere a cookies e outros testemunhos de conexão): o seu nome 
+                    completo, endereço de correio eletrónico, endereço postal e número de telefone. 
+                  </p>
+                  <p>
+                    3. Finalidades 3.1 Fundamento de legitimidade do tratamento de dados Desta forma, os seus 
+                    Dados são recolhidos com a finalidade de: - responder às suas questões através do formulário 
+                    de contato; - enviar-lhe informações sobre as nossas ofertas, novidades e eventos (newsletters);
+                    - avaliar dados geográficos, demográficos e estatísticos; 
+                  </p>
+                  <p>
+                    4. Período de conservação dos seus 
+                    dados Os Dados que lhe dizem respeito, recolhidos e tratados através do formulário de 
+                    contacto serão mantidos somente durante o processamento do seu pedido. Em seguida serão 
+                    destruídos, exceto se tiver subscrito a nossa newsletter. Neste caso, os seus dados 
+                    serão mantidos por um período de três (3) anos a contar da respetiva recolha. No final 
+                    deste período, poderemos contactá-lo novamente para confirmar se deseja continuar a 
+                    receber as nossas comunicações sobre ofertas, novidades e eventos. Os seus Dados serão 
+                    destruídos no prazo aplicável pela lei, a contar do seu pedido de cancelamento de inscrição. 
+                    Finalmente, os logs de conexão recolhidos com o seu consentimento, no contexto de 
+                    cookies e outros testemunhos de conexão configurados na nossa Landig Page, serão 
+                    mantidos por um período não superior a treze (13) meses. 
+                  </p>
+                  <p>
+                    5. Destinatários dos dados 
+                    5.1 As informações pessoais disponibilizadas destinam-se à Beangel. 
+                  </p>
+                  <p>
+                    5.2 Além disso, os 
+                    seus dados pessoais poderão ser divulgados a terceiros, para:
+                    <br> 
+                    *Satisfazer exigências 
+                    impostas pela lei ou pelas autoridades governamentais ou judiciais competentes; 
+                    <br>
+                    *Satisfazer 
+                    exigências necessárias para instaurar ou sustentar um processo judicial ou a defesa 
+                    numa ação judicial;
+                    <br>
+                    * Ser comunicados à polícia ou às autoridades judiciais, em conformidade 
+                    com as leis e regulamentos aplicáveis e mediante um pedido formal por parte das autoridades, 
+                    para efeitos de prevenção de fraude contra nós (serviços anti-fraude). 
+                  </p>
+                  <p>
+                    6. Segurança e 
+                    confidencialidade dos dados Empenhamo-nos na implementação de todas as precauções necessárias 
+                    para preservar a confidencialidade e segurança dos dados pessoais tratados e impedir que estes 
+                    sejam distorcidos, danificados, destruídos, ou que terceiros não autorizados tenham acesso aos mesmos. 
+                    Foram desenvolvidas medidas de segurança técnicas e organizacionais de ponta, especialmente no que 
+                    diz respeito a sistemas de informação. No entanto, não controlamos todos os riscos relacionados com a 
+                    utilização da Internet e chamamos a atenção dos visitantes para a existência de possíveis riscos 
+                    associados ao seu uso e funcionamento. 
+                  </p>
+                  <p>
+                    7. Os seus direitos De acordo com a legislação em vigor, o 
+                    Utilizador tem direito de acesso e retificação dos seus Dados, bem como o direito de solicitar a sua 
+                    eliminação, opor-se ao seu tratamento e obter a sua limitação ou portabilidade na medida em que seja 
+                    aplicável.Pode igualmente opor-se a que os seus Dados sejam utilizados com o fim de criação do seu perfil 
+                    de cliente; neste caso, não poderá beneficiar de ofertas ou serviços personalizados. Estes pedidos 
+                    devem ser feitos por meio email enviado para geral@beangel.pt Além disso, pode, a qualquer momento, 
+                    pedir para deixar de receber as nossas comunicações sobre ofertas, novidades e eventos, utilizando o 
+                    link de hipertexto previsto para o efeito no final de cada mensagem eletrónica que lhe enviamos.
+                  </p>
+                  <p>  
+                    Direito de apresentar uma reclamação Para qualquer questão sobre a recolha e tratamento dos seus Dados 
+                    pela Beangel, pode contactar por correio eletrónico e serviço de apoio ao cliente através do endereço 
+                    seguinte geral@beangel.pt. 
+                  </p>
+                  <p>
+                    Pode igualmente apresentar uma reclamação junto da Comissão Nacional de 
+                    Proteção de Dados (CNPD), R. de São Bento 148, 1200-031 Lisboa, sobre a forma como a Beangel recolhe 
+                    e processa os seus dados.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" bsModal #RRModal="bs-modal" [config]="{backdrop: 'static'}"
+      tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header pb-0">
+            <span class="pull-right hover" (click)="RRModal.hide()"><img style="width: 50%" src="../../assets/icons/close.png" alt="close"></span>
+          </div>
+          <div class="modal-body pt-0">
+            <div class="d-flex justify-content-center">
+              <div class="col-10 p-0 mb-3">
+                <div class="modal-sobre font-blueCustom text-center mb-4">
+                  <span class="position-sbBlue"><img style="width: 15%" src="../../assets/icons/sb_blue.png" alt="sb_blue"></span>
+                  <h5>RAL e RLL</h5>
+                </div>
+                <div class="modal-corpo mb-5">
+                  <p>
+                    Em caso de litígio o consumidor pode recorrer a uma entidade de Resolução Alternativa de Litígios de 
+                    Consumo (RAL). As entidades de Resolução Alternativa de Litígios de Consumo (RAL) são as entidades 
+                    autorizadas a efetuar a mediação, conciliação e arbitragem de litígios de consumo em Portugal que 
+                    estejam inscritas na lista de entidades RAL prevista pela Lei n.º 144/2015. Clique em 
+                    <a href="https://www.ipai.pt/fotos/gca/i006245_1459446712.pdf" target="_blank">
+                      www.ipai.pt/fotos/gca/i006245_1459446712.pdf
+                    </a>
+                  </p>
+                  <p>
+                    O consumidor pode recorrer à plataforma europeia de resolução de litígios em linha disponível em 
+                    <a href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=PT" target="_blank">
+                      ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=PT
+                    </a>.
+                  </p>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-10">
+      <nav class="navbar navbar-expand-lg pb-0">
+        <div class="d-flex align-items-center">
+          <div class="col-3 py-2 navLogo">
+            <img class="img-fluid" src="../../assets/icons/logo.png" alt="logo">
+          </div>
+          <div class="col-4">
+            <div class="row">
+              <div class="col-6 navFale font-blueCustom">
+                fale connosco
+              </div>
+              <div class="col-6 navFone">
+                253 090 669
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="row">
+        <div id="container" class="col p-0">
+          <img id="customBanner" class="img-fluid" src="../../assets/images/banner_top_deskotp.jpg" alt="banner">
+          <figcaption class="w-100 h-100">
+            <div class="container">
+              <div class="row">
+                <div class="col-6" style="margin-top: 15rem;">
+                  <div class="text-central-bold">
+                    <p>Queremos apoiar o seu negócio em todas a áreas informáticas</p>
+                  </div>
+                  <div class="text-central">
+                    <p>Temos várias soluções disponíveis para o ajudar. Somos o parceiro que procura.</p>
+                  </div>
+                  <img class="img-fluid-reseller text-central" src="../../assets/icons/reseller.png" alt="reseller">
+                </div>
+              </div>
+            </div>
+          </figcaption>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="col-10 pb-5">
+      <div class="text-center creation">
+        <div class="title-creation text-center mb-5">
+          <span class="position-sbBlue-creation"><img style="width: 15%" src="../../assets/icons/sb_blue.png" alt="sb_blue"></span>
+          <h3>Quem somos?</h3>
+        </div>
+        <p class="rLight">
+          A <span class="rBold-blue font-blueCustom">Soluções Brilhantes</span> foi criada em 2007, tendo assim já uma vasta experiência no ramo da informática. A nossa empresa presta a assistência técnica que o seu negócio necessita, bem como a distribuição de consumíveis informáticos. 
+        </p>
+        <p class="rLight">
+          Somos parceiros do software <span class="rBold-green font-greenCustom">Sage</span>, a solução para otimizar a sua empresa a nível de gestão, faturação ou contabilidade. Estamos disponíveis para encontrar uma solução à medida de cada negócio. Acreditamos que juntos podemos sempre evoluir e inovar!
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="col-10 empresas">
+      <div class="row">
+        <div class="col-6">
+          <div class="mx-5 my-3">
+            <div class="rBold">
+              <div class="title-empresas font-greenCustom">
+                <span>___</span>
+              </div>
+              <h5 class="mb-3">SAGE 50 CLOUD</h5>
+            </div>
+            <div class="rLightEmpresas mb-0 text-uppercase">
+              <p class="mb-0">Micro e pequenas empresas</p>
+            </div>
+            <div class="rBold font10">
+              <p>Faturação; Loja; Salários; Contabilidade</p>
+            </div>
+            <div class="rLightEmpresas">
+              <p>Cumpra a lei e tenha uma gestão mais simples do seu negócio, maior controlo, melhores decisões e mais produtividade.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mx-5 my-3">
+            <div class="rBold">
+              <div class="title-empresas font-greenCustom">
+                <span>___</span>
+              </div>
+              <h5 class="mb-3">SAGE FOR ACCOUNTANTS</h5>
+            </div>
+            <div class="rLightEmpresas mb-0 text-uppercase">
+              <p class="mb-0">GABINETES DE CONTABILIDADE</p>
+            </div>
+            <div class="rBold font10">
+              <p>Contabilidade</p>
+            </div>
+            <div class="rLightEmpresas">
+              <p>Software com certificação SVAT, que facilita a entrega da IES/DA com simplicidade e conformidade legal.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 pt-3">
+          <div class="mx-5 my-3">
+            <div class="rBold">
+              <div class="title-empresas font-greenCustom">
+                <span>___</span>
+              </div>
+              <h5 class="mb-3">SAGE 100 CLOUD</h5>
+            </div>
+            <div class="rLightEmpresas mb-0 text-uppercase">
+              <p class="mb-0">pequenas e médias empresas</p>
+            </div>
+            <div class="rBold font10">
+              <p>Gestão, Recursos Humanos, Contabilidade</p>
+            </div>
+            <div class="rLightEmpresas">
+              <p>Software que proporciona poupança de tempo para levar o seu negócio ao nível seguinte, independentemente da etapa em que se encontra no seu percurso.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="col-10 services">
+      <div class="title-creation text-center mb-5">
+        <h3 class="text-dark mt-5">Os nossos serviços</h3>
+      </div>
+      <div class="row px-5 mx-2 flex-nowrap">
+        <div class="d-flex justify-content-center">
+          <div class="col-4 text-center card-services rounded mx-2">
+            <div class="logo-services">
+              <span><img style="width: 35%" src="../../assets/icons/sb_grey.png" alt="sb_blue"></span>
+            </div>
+            <h5 class="my-5 font-blueCustom position-relative">Suporte Técnico</h5>
+            <p class="px-4 text-dark">Dispomos de um suporte técnico para que através de um simples clique ou chamada, possa ter a ajuda que necessita a qualquer momento.</p>
+          </div>
+          <div class="col-4 text-center card-services rounded mx-2">
+            <div>
+              <span class="logo-services"><img style="width: 35%" src="../../assets/icons/sb_grey.png" alt="sb_blue"></span>
+            </div>
+            <h5 class="my-5 font-blueCustom mx-3 position-relative">Distribuição de consumíveis</h5>
+            <p class="px-4 text-dark">Adquira de forma cómoda e rápida, os consumíveis na sua empresa através do nosso canal de distribuição.</p>
+          </div>
+          <div class="col-4 text-center card-services rounded mx-2">
+            <div>
+              <span class="logo-services"><img style="width: 35%" src="../../assets/icons/sb_grey.png" alt="sb_blue"></span>
+            </div>
+            <h5 class="my-5 font-greenCustom position-relative">Soluções à medida</h5>
+            <p class="px-4 text-dark">Desenvolvemos soluções de acordo com a sua necessidade seja ela mobilidade, relatórios, integração ou outros.</p>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center position-relative mt-5">
+        <div class="col-3 pt-4 pb-2">
+          <div class="buttomAsk hover ml-4">
+            <a href="mailto:paulob1@hotmail.com" target="_blank"><p class="text-white">FALE CONNOSCO</p></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="col-10 p-0">
+
+        <div class="row other-services">
+          <span class="m-1"><img style="width: 85%" src="../../assets/images/small_banner_01.jpg" alt="small_banner"></span>
+          <span class="m-1"><img style="width: 85%" src="../../assets/images/small_banner_02.jpg" alt="small_banner"></span>
+        </div>
+
+      <div class="col-6 other-servicesW mx-5 mt-5 px-5 pt-5">
+        
+        <div class="mb-5">
+          <h4 class="title-creation">Outros serviços</h4>
+          <div class="other-servicesIcon">
+            <span><img style="width: 18%" src="../../assets/icons/sb_blue.png" alt="sb_blue"></span>
+          </div>
+        </div>
+        <div class="mb-5">
+          <p class="font-otherServicesT font-blueCustom">Backups – dados</p>
+          <div class="title-services font-greenCustom">
+            <span>___</span>
+          </div>
+          <p class="font-otherServicesB">Armazene toda a sua informação num servidor cloud de forma segura e simples.</p>
+        </div>
+        <div class="mt-5 pt-3">
+          <div class="other-servicesPartner">
+            <span><img style="width: 30%" src="../../assets/images/DRL_H_parceiro_autorizado_2.jpg" alt="partner"></span>
+          </div>
+          <p class="font-otherServicesT font-blueCustom">Recuperação – dados</p>
+          <div class="title-services2 font-greenCustom">
+            <span>___</span>
+          </div>
+          <p class="font-otherServicesB">Dispomos de mecanismos para a recuperação dos seus dados em equipamentos danificados/elegíveis)</p>
+        </div>
+      </div>
+      <div class="other-servicesB">
+        <div class="col-6 p-5">
+          <div class="px-5 py-4">
+            <p class="font-otherServicesT text-white">Consultoria Web</p>
+            <div class="title-services3 font-greenCustom">
+              <span>___</span>
+            </div>
+            <p class="font-otherServicesB  text-white">Trabalhamos em parceria com uma equipa de programadores e criativos com o objetivo de dar a conhecer o seu negócio e aproximar-se online do seu público-alvo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex text-center mt-5 mb-4">
+        <div class="col-3">
+          <p class="font-blueCustom font-contact mb-2">FALE CONNOSCO</p>
+          <p class="font-contact2">Tlf. 253 090 669 <br>
+             geral@solucoesbrilhantes.com</p>
+        </div>
+        <div class="col-3">
+          <p class="font-blueCustom font-contact mb-2">VISITE-NOS</p>
+          <p class="font-contact2">Rua Veiga Castelães, 436 <br>
+             4805-339 Guimarães</p>
+        </div>
+        <div class="col-3">
+          <p class="font-blueCustom font-contact mb-2">HORÁRIO</p>
+          <p class="font-contact2">Segunda a Sexta: <br>
+             9h às 13h | 14h às 19h</p>
+        </div>
+        <div class="col-3">
+          <p class="font-blueCustom font-contact mb-2">SIGA-NOS</p>
+          <div>
+            <span><a href="https://www.facebook.com/" target="_blank"><img style="width: 65%" src="../../assets/icons/facebook.png" alt="partner"></a></span>
+          </div>
+        </div>
+      </div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2989.7782148733754!2d-8.33222738507013!3d41.46572539909893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd24faa268770b9b%3A0x4692ba906eaa6747!2sR.%20da%20Veiga%20de%20Castel%C3%A3es%20436%2C%204805-298%20Ponte%2C%20Portugal!5e0!3m2!1spt-BR!2sbr!4v1587081068303!5m2!1spt-BR!2sbr" 
+        width="1125" 
+        height="350" 
+        frameborder="0" 
+        style="border:0;" 
+        allowfullscreen="" 
+        aria-hidden="false" 
+        tabindex="0"
+        >
+      </iframe>
+      <div class="customFooter">
+        <div class="d-flex justify-content-center">
+          <div class="support">
+            <span><a href="https://secure.corporate.beanywhere.com/integration/integration.php?uid=c79fae9c-81e6-11e3-b2ba-12313931119b" 
+              target="_blank"><img style="width: 30%" src="../../assets/icons/support.png" alt="partner"></a></span>
+          </div>
+          <div class="d-flex m-3">
+            <p class="mb-2 mt-2 px-1 text-white">Soluções Brilhantes © Todos os direitos reservados</p>
+            <p class="mb-2 mt-2 px-1 text-muted hover" (click)="PPModal.show()">Política de Privacidade e Cookies</p>
+            <p class="mb-2 mt-2 px-1 text-muted hover" (click)="RRModal.show()">RAL e RLL</p>
+          </div>
+          <div class="netLogo">
+            <span><img style="width: 44%" src="../../assets/icons/netgocio.png" alt="partner"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

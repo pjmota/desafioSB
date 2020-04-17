@@ -1,0 +1,11 @@
+
+invalid-form-control {
+  display: block;
+  width: 100%;
+}
+
+.invalid-feedback {
+  font-size: 65%;
+  padding-left: 1rem;
+  margin-top: 0;
+}
